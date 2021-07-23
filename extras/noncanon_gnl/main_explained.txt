@@ -1,0 +1,221 @@
+#include <stdio.h>
+#include <termcap.h>
+#include <string.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <errno.h>
+#include <termios.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <term.h>
+
+#ifdef unix
+static char term_buffer[2048];
+#else
+#define term_buffer 0
+#endif
+
+char PC;   /* For tputs.  */
+char *BC;  /* For tgoto.  */
+char *UP;
+
+void ft_fatal(const char *str, const char *str2)
+{
+	if (str) printf("%s", str);
+	if (str2) printf("%s", str2);
+	exit(1);
+}
+
+//int tgetnum (char *name);
+//int tgetflag (char *name);
+//char *tgetstr (char *name, char **area);
+
+int main()
+{
+	char *termtype = getenv ("TERM");
+	int success;
+
+	if (termtype == 0)
+		ft_fatal("Specify a terminal type with `setenv TERM <yourtype>'.\n", 0);
+	success = tgetent (term_buffer, termtype);
+	if (success < 0)
+		ft_fatal("Could not access the termcap data base.\n", 0);
+	if (success== 0)
+		ft_fatal(termtype, ":Terminal type is not defined\n");
+
+
+#define BUFFADDR 0
+
+	char *temp;
+	char *buffer = (char *)malloc(2048);
+	temp = tgetstr ("up", BUFFADDR);
+	if (!temp)
+		printf("kk\n");
+	else
+	{
+		printf("%s\n", temp);
+	}
+	
+
+	temp = tgetstr ("pc", BUFFADDR);
+  	PC = temp ? *temp : 0;
+	BC = tgetstr ("le", BUFFADDR);
+	UP = tgetstr ("up", BUFFADDR);	
+
+	struct termios tty;
+
+	if(tcgetattr(STDIN_FILENO, &tty) != 0)
+    	printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
+
+	/* CONTROL MODES c_cflag */
+
+	/*
+	*	If this bit is set, generation and detection of the parity bit is enabled.
+	*	Most serial communications do not use a parity bit, so if you are unsure, clear this bit.
+	*/
+	tty.c_cflag &= ~PARENB; /* Clear parity bit (Most serial communications do not use a parity bit) */
+
+	/*
+	*	If this bit is set, two stop bits are used. If this is cleared, only one stop bit is used.
+	*	Most serial communications only use one stop bit.
+	*/
+	tty.c_cflag &= ~CSTOPB; /* Clear stop field, only one stop bit used in communication */
+	
+	/*
+	*	The CS<number> fields set how many data bits are transmitted per byte across the serial port.
+	*	The most common setting here is 8 (CS8). Definitely use this if you are unsure,
+	*	I have never used a serial port before which didn’t use 8 (but they do exist).
+	*	You must clear all of the size bits before setting any of them with &= ~CSIZE.
+	*/
+	tty.c_cflag &= ~CSIZE; 	/* Clear all the size bits, then use one */
+	tty.c_cflag |= CS8; 	/* 8 bits per byte (most common) */
+	
+	/*
+	*	If the CRTSCTS field is set, hardware RTS/CTS flow control is enabled.
+	*	The most common setting here is to disable it.
+	*	Enabling this when it should be disabled can result in your serial port receiving no data,
+	*	as the sender will buffer it indefinitely, waiting for you to be “ready”.
+	*/
+	tty.c_cflag &= ~CRTSCTS; /* Disable RTS/CTS hardware flow control (most common) */
+
+	/*
+	*	If the CRTSCTS field is set, hardware RTS/CTS flow control is enabled.
+	*	The most common setting here is to disable it.
+	*	Enabling this when it should be disabled can result in your serial port receiving no data,
+	*	as the sender will buffer it indefinitely, waiting for you to be “ready”.
+	*/
+	tty.c_cflag |= CREAD | CLOCAL; /* Turn on READ & ignore ctrl lines (CLOCAL = 1) */
+
+	/* LOCAL MODES c_lflag */
+
+	/*
+	*	UNIX systems provide two basic modes of input, canonical and non-canonical mode.
+	*	In canonical mode, input is processed when a new line character is received.
+	*	The receiving application receives that data line-by-line.
+	*	This is usually undesirable when dealing with a serial port,
+	*	and so we normally want to disable canonical mode.
+	*/
+	tty.c_lflag &= ~ICANON; /* Canonical mode disabled */
+	/*
+	*	Also, in canonical mode, some characters such as backspace are treated specially,
+	*	and are used to edit the current line of text (erase).
+	*	Again, we don’t want this feature if processing raw serial data,
+	*	as it will cause particular bytes to go missing!
+	*/
+
+	/*
+	*	If this bit(ECHO) is set, sent characters will be echoed back.
+	*	Because we disabled canonical mode, I don’t think these bits actually do anything,
+	*	but it doesn’t harm to disable them just in case!
+	*/
+	tty.c_lflag &= ~ECHO;	/* Disable echo */
+	tty.c_lflag &= ~ECHOE;	/* Disable erasure */
+	tty.c_lflag &= ~ECHONL;	/* Disable new-line echo */
+
+	/*
+	*	When the ISIG bit is set, INTR, QUIT and SUSP characters are interpreted.
+	*	We don’t want this with a serial port, so clear this bit:
+	*/
+	tty.c_lflag &= ~ISIG; /* Disable interpretation of INTR, QUIT and SUSP */
+
+	/* INPUT MODES c_iflag
+	*	The c_iflag member of the termios struct contains low-level settings for input processing. 
+	*	The c_iflag member is an int.
+	*/
+
+	/* Clearing IXOFF, IXON and IXANY disables software flow control, which we don’t want */
+	tty.c_iflag &= ~(IXON | IXOFF | IXANY); /* Turn off s/w flow ctrl */
+
+	/*
+	*	Clearing all of the following bits disables any special handling of the bytes
+	*	as they are received by the serial port, before they are passed to the application.
+	*	We just want the raw data thanks!
+	*/
+	tty.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL); /* Disable any special handling of received bytes */
+
+	/* OUTPUT MODES c_oflag
+	*	The c_oflag member of the termios struct contains low-level settings for output processing.
+	*	When configuring a serial port, we want to disable any special handling of output chars/bytes
+	*/
+
+	tty.c_oflag &= ~OPOST; /* Prevent special interpretation of output bytes (e.g. newline chars) */
+	tty.c_oflag &= ~ONLCR; /* Prevent conversion of newline to carriage return/line feed */
+	// tty.c_oflag &= ~OXTABS; // Prevent conversion of tabs to spaces (NOT PRESENT IN LINUX)
+	// tty.c_oflag &= ~ONOEOT; // Prevent removal of C-d chars (0x004) in output (NOT PRESENT IN LINUX)
+	/*
+	*	Both OXTABS and ONOEOT are not defined in Linux. Linux however does have the XTABS field which seems to be related.
+	*	When compiling for Linux, I just exclude these two fields and the serial port still works fine.
+	*/
+
+	/* VMIN and VTIME (c_cc)	
+	*	An important point to note is that VTIME means slightly different things depending on what VMIN is.
+	*	When VMIN is 0, VTIME specifies a time-out from the start of the read() call.
+	*	But when VMIN is > 0, VTIME specifies the time-out from the start of the first received character.
+	*/
+
+	/* COMBINATIONS:
+	*	-VMIN = 0, VTIME = 0: No blocking, return immediately with what is available
+	*	-VMIN > 0, VTIME = 0: This will make read() always wait for bytes
+	*		(exactly how many is determined by VMIN), so read() could block indefinitely.
+	*	-VMIN = 0, VTIME > 0: This is a blocking read of any number chars with a maximum timeout (given by VTIME).
+	*		read() will block until either any amount of data is available, or the timeout occurs.
+	*		This happens to be my favourite mode (and the one I use the most).
+	*	-VMIN > 0, VTIME > 0: Block until either VMIN characters have been received,
+	*		or VTIME after first character has elapsed.
+	*		Note that the timeout for VTIME does not begin until the first character is received.
+	*/
+
+	tty.c_cc[VMIN] = 1;
+	tty.c_cc[VTIME] = 0;
+
+	/* BAUD RATE
+	*	Rather than use bit fields as with all the other settings,
+	*	the serial port baud rate is set by calling the functions cfsetispeed() and cfsetospeed(),
+	*	passing in a pointer to your tty struct and a enum
+	*/
+	/* Not allowed on minishell, asumo que suda */
+
+	// Save tty settings, also checking for error
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &tty) != 0)
+    	printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
+	char buff[20];
+	while(1)
+	{
+		int n = read(STDIN_FILENO, &buff, sizeof(buff));
+		if (n > 0)
+		{
+			write(0, buff, n);
+			if (buff[0] == 'q')
+				break ;
+		}
+	}
+	close (STDIN_FILENO);
+
+	struct termios	tattr;
+
+	tcgetattr(STDIN_FILENO, &tattr);
+	tattr.c_lflag |= (ECHO | ICANON);
+	tattr.c_oflag |= (OPOST);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &tattr);
+	return (0);
+}
