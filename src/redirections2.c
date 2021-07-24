@@ -49,9 +49,9 @@ static int	apply_redirections_inner_loop_aux(t_ar *ar, t_args **list)
 
 /*
 *	This function makes sure (with inner_loop_aux) that the redirection symbol
-*	is followed by the named argument in the same string, the named argument is retrieved
-*	with our get_file function and then uses it to open the corresponding fd duplicate
-*	if it haves to (special case here_doc)
+*	is followed by the named argument in the same string, the named argument
+*	is retrieved with our get_file function and then uses it to open the
+*	corresponding fd duplicate if it haves to (special case here_doc).
 */
 static int	apply_redirections_inner_loop(t_shell *s, t_ar *ar, t_args **list)
 {
@@ -79,12 +79,13 @@ static int	apply_redirections_inner_loop(t_shell *s, t_ar *ar, t_args **list)
 *	a valid redirection symbol, or a string after a valid redirection symbol.
 *	
 *	The parts of a redirection can be splited in consecutive arguments or be
-*	concatenated in the same argument (2 > file == 2>file == 2 >file == 2> file).
+*	concatenated in the same argument
+*	(2 > file == 2>file == 2 >file == 2> file).
 *
-*	In the end this function checks if the next argument in the array is a redirection,
-*	if it starts with a number its parsed as the fd of the redirection, independently
-*	of the number existing or not the next argument must be a valid redirection symbol,
-*	if not it isnt a redirection.
+*	In the end this function checks if the next argument in the array is a
+*	redirection, if it starts with a number its parsed as the fd of the
+*	redirection, independently of the number existing or not the next argument
+*	must be a valid redirection symbol, if not it isnt a redirection.
 */
 static void	apply_redirections_aux(t_ar *ar)
 {

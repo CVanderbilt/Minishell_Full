@@ -29,7 +29,7 @@ int	get_var_no_key(char **dst, int *pos)
 }
 
 /*
-*	This function checks if the key to parse is $$ we expand it to $ (revisar esto),
+*	This function checks if the key to parse is $$ we expand it to $,
 *	or $? which we expand to the last output of a program.
 */
 int	get_var_short_key(t_shell *s, int *pos, char **dst, const char *line)

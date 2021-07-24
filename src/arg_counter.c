@@ -35,13 +35,14 @@ static int	if_helper(const char *line, t_ac *a, int option)
 }
 
 /*
-*	This function checks the actual char, if it is a quote the function isquoted
-*	will be called to manage them, after it if a redirection was find 0 will be returned
-*	and if an error ocurred we asume it was a multiline error.
-*	If the actual char was $ an expansion of the variable has to be done, so the function get_var
-*	is called.
-*	If the actual char was \ it is managed (it could provoke a multiline error).
-*	else the char is just added to the parsed line.
+*	This function checks the actual char, if it is a quote the function
+*	isquoted will be called to manage them, after it if a redirection was
+*	find 0 will be returned and if an error ocurred we asume it was a
+*	multiline error.
+*	If the actual char was $ an expansion of the variable has to be done, so
+*	the function get_var is called.
+*	If the actual char was \ it is managed (it could provoke a multiline
+*	error) else the char is just added to the parsed line.
 */
 static int	inner_loop_aux(t_shell *shell, const char *line, t_ac *a)
 {
@@ -71,10 +72,11 @@ static int	inner_loop_aux(t_shell *shell, const char *line, t_ac *a)
 }
 
 /*
-*	This function checks char by char in a loop, firstly if the char is a cmd_sep the loop is breaked.
-*	else the flag is activated (the next return will be treated as an argument if no errors were present).
-*	On each char the function inner_loop_aux is called which on 0 breaks the loop and on -1
-*	an error is raised, any other result is ignored.
+*	This function checks char by char in a loop, firstly if the char is a
+*	cmd_sep the loop is breaked else the flag is activated (the next return
+*	will be treated as an argument if no errors were present).
+*	On each char the function inner_loop_aux is called which on 0 breaks the
+*	loop and on -1 an error is raised, any other result is ignored.
 */
 static int	inner_loop(t_shell *shell, const char *line, t_ac *a)
 {
@@ -114,11 +116,12 @@ static int	check_if_has_extra_arg(const char *line)
 }
 
 /*
-*	this function checks the actual char in the line, if it is a command separator it
-*	returns a 0 so the main loop will end, if not it continues and set the flag to 0
-*	(by default it is not an argument).
-*	If it didnt ended to this point all spaces are skipped except one, then the function
-*	inner_loop is called (this function is expected to return -1, if not an error will be raised).
+*	this function checks the actual char in the line, if it is a command
+*	separator it returns a 0 so the main loop will end, if not it continues
+*	and set the flag to 0 (by default it is not an argument).
+*	If it didnt ended to this point all spaces are skipped except one, then
+*	the function inner_loop is called (this function is expected to return -1,
+*	if not an error will be raised).
 */
 static int	main_loop_aux(t_shell *shell, const char *line, t_ac *a)
 {
@@ -141,13 +144,14 @@ static int	main_loop_aux(t_shell *shell, const char *line, t_ac *a)
 }
 
 /*
-*	This function is the core function of the parser, it will traverse the line
-*	string char by char, the main_loop_aux function will check and make the necessary
-*	changes that each char provokes and will return after a group of chars is parsed
-*	forming an argument, if it returns 0 the program ended, if it returns -1
-*	an error was raised and else the loop continues and does a check:
-*	if the flag 'flag' is activated that means that the argument is an argument it is
-*	added to the args list.
+*	This function is the core function of the parser, it will traverse the
+*	line string char by char, the main_loop_aux function will check and make
+*	the necessary changes that each char provokes and will return after a
+*	group of chars is parsed forming an argument, if it returns 0 the program
+*	ended, if it returns -1 an error was raised and else the loop continues
+*	and does a check:
+*	if the flag 'flag' is activated that means that the argument is an
+*	argument it is added to the args list.
 */
 int	main_loop(t_shell *shell, const char *line, t_ac *a)
 {

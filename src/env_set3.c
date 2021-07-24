@@ -31,11 +31,9 @@ int	env_sorted_display_all(t_env *start)
 			ft_putstr(raw[i] + aux + 1);
 			write(1, "\"", 1);
 		}
-		write(1, "\n", 1);
-		free(raw[i]);
+		write(1, "\n", 1 + (int)ft_free(raw[i]));
 	}
-	free(raw);
-	return (1);
+	return (1 + (int)ft_free(raw));
 }
 
 /*

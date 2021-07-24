@@ -21,9 +21,10 @@ int	pipes_checks(t_shell *shell, int *p, int has_pipes)
 }
 
 /*
-*	Initial values are set on shell->pipe_write(stdout) and shell->prev_pipe_read(stdin)
-*	and then redirections are applied on those variables, after all this the command is
-*	executed and the stored file descriptors in shell->pipe_write... are closed.
+*	Initial values are set on shell->pipe_write(stdout) and
+*	shell->prev_pipe_read(stdin) and then redirections are applied on those
+*	variables, after all this the command is executed and the stored file
+*	descriptors in shell->pipe_write... are closed.
 */
 void	piped_parent_checks(t_shell *shell, void *(*ms_cmd)(t_shell*),
 		int has_pipes)

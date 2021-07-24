@@ -46,13 +46,9 @@ int	exec_executer(t_shell *s, char *f, char **argv, char **envp)
 	{
 		waitpid(e.pid, &e.status, (int)ft_dummy((close(e.p[1]))));
 		if (read(e.p[0], &e.c, 1) == 0)
-		{
-			s->ret = WEXITSTATUS(e.status);
-			return(0);
-		}
+			return (set_ret(s, WEXITSTATUS(e.status)) * 0);
 	}
-	s->ret = -1;
-	return (-1);
+	return (set_ret(s, -1) - 1);
 }
 
 /*
@@ -87,7 +83,6 @@ char	*get_path_from_paths(const char *paths, unsigned int *pos)
 	return (0);
 }
 
-
 /*
 *	This program checks if the given path is an executable, it returns
 *	1 if it is and 0 else.
@@ -96,9 +91,7 @@ int	check_path_is_exec(const char *path)
 {
 	struct stat	statbuf;
 
-	//return (!stat(path, &statbuf));
-
-	if (stat(path, &statbuf) == 0 && statbuf.st_mode & S_IXUSR) 
+	if (stat(path, &statbuf) == 0 && statbuf.st_mode & S_IXUSR)
 		return (1);
 	return (0);
 }
@@ -113,7 +106,6 @@ char	*get_full_path(char *path)
 
 	if (isAbsolute(path))
 		return (ft_strdup(path));
-	
 	if (!ft_sstrjoin(getcwd(0, 0), "/", 'l', &ret))
 		return (0);
 	if (!ft_sstrjoin(ret, path, 'l', &ret))
@@ -130,9 +122,10 @@ typedef struct s_sae
 }	t_sae;
 
 /*
-*	This function searchs in the PATH variable the command 'name', it concatenates it
-*	at the end of each valid path (each path is separated by :) and if any of them exists
-*	it is executed with the exec_executer, if not it returns the error CMD_NOT_FOUND.
+*	This function searchs in the PATH variable the command 'name', it
+*	concatenates it at the end of each valid path (each path is separated by :)
+*	and if any of them exists it is executed with the exec_executer, if not it
+*	returns the error CMD_NOT_FOUND.
 */
 static int	search_and_execute(t_shell *s, char *name, char **argv, char **envp)
 {
@@ -155,9 +148,7 @@ static int	search_and_execute(t_shell *s, char *name, char **argv, char **envp)
 				+ set_ret(s, miniperror(ERR_MEM)));
 		if (check_path_is_exec(t.new_path))
 		{
-			free(t.paths);
-			free(argv[0]);
-			argv[0] = t.new_path;
+			argv[0] = t.new_path + (int)ft_free(t.paths) + (int)ft_free(argv[0]);
 			return (exec_executer(s, argv[0], argv, envp));
 		}
 		free (t.new_path);
