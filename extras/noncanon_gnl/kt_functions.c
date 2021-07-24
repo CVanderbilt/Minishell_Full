@@ -1,6 +1,7 @@
 #include "kt_functions.h"
 #include "utils.h"
 #include "motion.h"
+#include "ultra_utils.h"
 
 /*
 *	This function is used to write strings on the minishell console,
@@ -25,7 +26,7 @@ void	ms_put_str(t_key *k, const char *str)
 
 void	set_key_type(t_key *key)
 {
-	if (ISPRINTABLE(key->key[0]))
+	if (key->key[0] > 31 && key->key[0] < 127)
 		key->type = KT_PRINTABLE;
 	else if (key->key[0] == '\x1b')
 	{
@@ -97,6 +98,5 @@ int	ft_manage_key(t_key *key)
 	functptr[6] = kf_move;
 	functptr[7] = kf_del;
 	functptr[8] = kf_eol;
-	int ret = functptr[key->type](key);
-	return (ret);
+	return (functptr[key->type](key));
 }

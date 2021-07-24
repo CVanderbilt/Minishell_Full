@@ -81,7 +81,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int		ft_strfind(const char *str, char to_find)
+int	ft_strfind(const char *str, char to_find)
 {
 	int	i;
 
@@ -90,23 +90,4 @@ int		ft_strfind(const char *str, char to_find)
 		if (str[i] == to_find)
 			return (i);
 	return (-1);
-}
-
-void	ft_putnbr_fd(int fd, long long num)
-{
-	char	c;
-
-	if (num < 0) {
-		write(fd, "-", 1);
-		num = -num;
-	}
-	if (num >= 10) {
-		ft_putnbr_fd(fd, num / 10);
-		num = num % 10;
-	}
-	if (num < 10)
-	{
-		c = num + 48;
-		write(fd, &c, 1);
-	}
 }

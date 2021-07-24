@@ -28,14 +28,13 @@ void	set_term_basic(void)
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &tattr);
 }
 
-int		set_term_specific(void)
+int	set_term_specific(void)
 {
 	struct termios	tty;
 	char			*termtype;
 
 	if (tcgetattr(STDIN_FILENO, &tty) != 0)
 		return (0);
-		//printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
 	tty.c_lflag &= ~ICANON;
 	tty.c_lflag &= ~ECHO;
 	tty.c_oflag &= ~OPOST;
@@ -46,14 +45,8 @@ int		set_term_specific(void)
 	termtype = getenv ("TERM");
 	if (termtype == 0)
 		return (0);
-		//write(1, "implementar que funcione con un gnl normal!!\n", 45);
 	tgetent(NULL, termtype);
 	return (1);
-}
-
-void	ft_putchar(char c)
-{
-	write(0, &c, 1);
 }
 
 int	line_edition_loop_end(t_key *key)
@@ -78,7 +71,7 @@ int	alt_loop(void *data, int (*hook)(void *, char *))
 	while (1)
 	{
 		eof = get_next_line(&line);
-		if (eof < 0) // error
+		if (eof < 0)
 			break ;
 		control = hook(data, line);
 		if (control == 0 || eof == 0)
@@ -110,9 +103,7 @@ int	line_edition_loop(
 		key.executing = 0;
 		key.l.last_key = key.type;
 		key.type = KT_UNRECOGNIZED;
-		if (!get_key(&key))
-			break ;
-		if (!ft_manage_key(&key))
+		if (!get_key(&key) || !ft_manage_key(&key))
 			break ;
 	}
 	return (line_edition_loop_end(&key));

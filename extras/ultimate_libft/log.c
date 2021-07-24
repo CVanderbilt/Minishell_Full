@@ -5,7 +5,7 @@
 int	ft_log(const char *str)
 {
 	int	fd;
-	
+
 	fd = open("ft_log.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd < 0)
 		return (fd);
@@ -13,10 +13,10 @@ int	ft_log(const char *str)
 	return (close(fd));
 }
 
-int ft_logn(const char *str)
+int ft_logn (const char *str)
 {
 	int	fd;
-	
+
 	fd = open("ft_log.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd < 0)
 		return (fd);
@@ -27,7 +27,7 @@ int ft_logn(const char *str)
 
 int	ft_nlog(long long int num)
 {
-	int fd;
+	int	fd;
 
 	fd = open("ft_log.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd < 0)

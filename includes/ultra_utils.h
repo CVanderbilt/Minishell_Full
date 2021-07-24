@@ -31,6 +31,7 @@ int		get_next_line(char **line);
 *			Checks
 */
 int		ft_is_digit(char c);
+int		ft_is_printable(char c);
 
 /*
 *			Frees

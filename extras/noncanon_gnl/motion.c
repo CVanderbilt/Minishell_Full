@@ -27,7 +27,7 @@ void	goto_cursor_data(t_key *k, unsigned int dst, int offset, int l)
 	k->l.cursor = dst;
 }
 
-void	goto_cursor(t_key *k, unsigned int dst) //revisar si llamamos al de data cuando podemos
+void	goto_cursor(t_key *k, unsigned int dst)
 {
 	int	c;
 	int	l;

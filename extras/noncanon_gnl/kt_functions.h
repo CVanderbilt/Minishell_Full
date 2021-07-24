@@ -1,7 +1,6 @@
 #ifndef KT_FUNCTIONS_H
 # define KT_FUNCTIONS_H
 # define KT_FUNCNUM 9
-# define ISPRINTABLE(c) (c > 31 && c < 127)
 # include "line_edition.h"
 # include <sys/ioctl.h>
 # include <stdio.h>
