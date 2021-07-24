@@ -167,9 +167,6 @@ int	red_open_dup(t_shell *s, int fd, const char *file, t_redir type)
 		}
 		else
 		{
-			ft_log("fd: ");
-			ft_nlog(fd);
-			ft_logn("");
 			dup2(s->stdin_save, 0);
 			dup2(s->stdout_save, 1);
 			dup2(s->stderr_save, 2);

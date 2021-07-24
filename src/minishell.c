@@ -88,34 +88,13 @@ int	init_commands(t_shell *shell)
 	return (0);
 }
 
-/*
-*	Initializes the shell function given the initial args of our program
-*/
-int	init_shell(
-	t_shell *shell, int argc, char *argv[], const char **envp)
+int	init_shell_vars(t_shell *shell)
 {
-	g_envp = (char **)envp;
-	if (argc > 1)
-	{
-		char	*tmp = get_full_path(argv[1]);
-		if (check_path_is_exec(tmp))
-		{
-			miniperror(ERR_INVALID_FILE_OR_PATH);
-			return (-1);
-		}		
-		int fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			return (-1);
-		dup2(fd, 0);
-		close(fd);
-	}
-	argc = argc + 0;
 	shell->ret = 0;
 	shell->fd = 1;
 	shell->userpromt = "minishell42>";
 	shell->forked = 0;
 	shell->isquoted = 0;
-	shell->env = env_init(envp);
 	shell->stdin_save = dup(STDIN_FILENO);
 	shell->stdout_save = dup(STDOUT_FILENO);
 	shell->stderr_save = dup(STDERR_FILENO);
@@ -125,6 +104,30 @@ int	init_shell(
 	shell->args = NULL;
 	shell->is_child = 0;
 	return (1);
+}
+
+/*
+*	Initializes the shell function given the initial args of our program
+*/
+int	init_shell(
+	t_shell *shell, int argc, char *argv[], const char **envp)
+{
+	char	*tmp;
+
+	g_envp = (char **)envp;
+	if (argc > 1)
+	{
+		tmp = get_full_path(argv[1]);
+		if (check_path_is_exec(tmp))
+			return (miniperror(ERR_INVALID_FILE_OR_PATH));	
+		shell->fd = open(argv[1], O_RDONLY);
+		if (shell->fd < 0)
+			return (-1);
+		dup2(shell->fd, 0);
+		close(shell->fd);
+	}
+	shell->env = env_init(envp);
+	return (init_shell_vars(shell));
 }
 
 /*
@@ -139,10 +142,7 @@ int	main(int argc, char *argv[], const char **envp)
 	t_cmd	cmd;
 
 	if (init_shell(&shell, argc, argv, envp) < 0)
-	{
-		//miniperror(ERR_INVALID_FILE_OR_PATH);
 		return (1);
-	}
 	shell.cmd = &cmd;
 	cmd.argc = 0;
 	cmd.argv = NULL;
