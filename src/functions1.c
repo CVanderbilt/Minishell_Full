@@ -25,9 +25,10 @@
 */
 
 /*
-*	This function just sets the last returned value of a program, the int passed is stored
-*	int s->ret and thats all of it.
-*	Depending on the ret value, the shell ret value is set to 0 (if ret is <= 0) or 1.
+*	This function just sets the last returned value of a program, the int
+*	passed is stored int s->ret and thats all of it.
+*	Depending on the ret value, the shell ret value is set to
+*	0 (if ret is <= 0) or 1.
 */
 int	set_ret(t_shell *s, int ret)
 {
