@@ -1,0 +1,75 @@
+extras/ultimate_libft/log.c: Error!
+Error: SPACE_EMPTY_LINE     (line:   8, col:   1):	Space on empty line
+Error: SPACE_BEFORE_FUNC    (line:  16, col:   4):	space before function name
+Error: SPACE_EMPTY_LINE     (line:  19, col:   1):	Space on empty line
+Error: SPACE_REPLACE_TAB    (line:  30, col:   8):	Found space when expecting tab
+Error: BRACE_SHOULD_EOL     (line:  37, col:   1):	Expected newline after brace
+extras/ultimate_libft/ultra_io0.c: OK!
+extras/ultimate_libft/ultra_str0.c: OK!
+extras/ultimate_libft/frees.c: OK!
+extras/ultimate_libft/get_next_line.c: Error!
+Error: BRACE_SHOULD_EOL     (line:  31, col:   1):	Expected newline after brace
+extras/ultimate_libft/ultra_utils.h: OK!
+extras/ultimate_libft/ultra_str1.c: Error!
+Error: TOO_MANY_TABS_FUNC   (line:  84, col:   5):	extra tabs before function name
+Error: TOO_MANY_FUNCS       (line:  95, col:   1):	Too many functions in file
+Error: NO_SPC_AFR_PAR       (line:  99, col:  16):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line:  99, col:  18):	Missing tabs for indent level
+Error: NO_SPC_AFR_PAR       (line: 103, col:  18):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 103, col:  20):	Missing tabs for indent level
+Error: BRACE_SHOULD_EOL     (line: 112, col:   1):	Expected newline after brace
+extras/ultimate_libft/checks.c: OK!
+extras/noncanon_gnl/kt_history.c: OK!
+extras/noncanon_gnl/utils.h: OK!
+extras/noncanon_gnl/motion2.c: OK!
+extras/noncanon_gnl/motion.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  30, col:  49):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  30, col:  96):	line too long
+extras/noncanon_gnl/kt_functions.h: Error!
+Error: PREPROC_CONSTANT     (line:   4, col:  16):	Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:   4, col:  17):	Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:   4, col:  20):	Preprocessor statement must only contain constant defines
+Error: TOO_MANY_VALS        (line:   4, col:  21):	Too many values on define
+Error: TOO_MANY_VALS        (line:   4, col:  25):	Too many values on define
+Error: TOO_MANY_VALS        (line:   4, col:  31):	Too many values on define
+Error: TOO_MANY_VALS        (line:   4, col:  35):	Too many values on define
+extras/noncanon_gnl/types.h: OK!
+extras/noncanon_gnl/ask_cursor_pos.c: OK!
+extras/noncanon_gnl/kt_move_unrec.c: OK!
+extras/noncanon_gnl/sig_handler.h: OK!
+extras/noncanon_gnl/line_edition.h: OK!
+extras/noncanon_gnl/motion.h: OK!
+extras/noncanon_gnl/utils.c: OK!
+extras/noncanon_gnl/main_simple.c: Error!
+Error: TOO_MANY_TABS_FUNC   (line:  31, col:   5):	extra tabs before function name
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:  22):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:  22):	Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line:  90, col:   1):	Too many functions in file
+Error: TOO_MANY_LINES       (line: 119, col:   1):	Function has more than 25 lines
+extras/noncanon_gnl/kt_eol.c: OK!
+extras/noncanon_gnl/kt_print.c: Error!
+Error: VAR_DECL_START_FUNC  (line:  14, col:   1):	Variable declaration not at start of function
+Error: MISALIGNED_VAR_DECL  (line:  14, col:   9):	Misaligned variable declaration
+Error: VAR_DECL_START_FUNC  (line:  15, col:   1):	Variable declaration not at start of function
+Error: MISALIGNED_VAR_DECL  (line:  15, col:   9):	Misaligned variable declaration
+Error: EMPTY_LINE_FUNCTION  (line:  22, col:   1):	Empty line in function
+Error: VAR_DECL_START_FUNC  (line:  23, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  23, col:  17):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  23, col:  18):	Misaligned variable declaration
+Error: SPACE_EMPTY_LINE     (line:  24, col:   1):	Space on empty line
+Error: EMPTY_LINE_FUNCTION  (line:  32, col:   1):	Empty line in function
+Error: CONSECUTIVE_NEWLINES (line:  33, col:   1):	Consecutive newlines
+Error: EMPTY_LINE_FUNCTION  (line:  33, col:   1):	Empty line in function
+Error: TOO_MANY_LINES       (line:  38, col:   1):	Function has more than 25 lines
+extras/noncanon_gnl/line_edition2.c: OK!
+extras/noncanon_gnl/kt_functions.c: Error!
+Error: TOO_MANY_FUNCS       (line:  87, col:   1):	Too many functions in file
+Error: VAR_DECL_START_FUNC  (line: 100, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 100, col:   8):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 100, col:  13):	Declaration and assignation on a single line
+extras/noncanon_gnl/ultra_utils.h: OK!
+extras/noncanon_gnl/kt_del.c: OK!
+extras/noncanon_gnl/sig_handler.c: OK!
+extras/noncanon_gnl/line_edition1.c: OK!

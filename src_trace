@@ -1,0 +1,103 @@
+src/get_var.c: Error!
+Error: LINE_TOO_LONG        (line:  31, col:   1):	line too long
+src/redirections1.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:  13):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 115, col:   1):	Function has more than 25 lines
+Error: EMPTY_LINE_FUNCTION  (line: 132, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 132, col:   1):	Space on empty line
+Error: WRONG_SCOPE_VAR      (line: 152, col:   1):	Variable declared in incorrect scope
+Error: WRONG_SCOPE_VAR      (line: 153, col:   1):	Variable declared in incorrect scope
+Error: WRONG_SCOPE_VAR      (line: 154, col:   1):	Variable declared in incorrect scope
+Error: WRONG_SCOPE_COMMENT  (line: 161, col:  28):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 161, col:  28):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 163, col:  31):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 163, col:  31):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 163, col:  31):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 163, col:  98):	line too long
+Error: LINE_TOO_LONG        (line: 164, col:  39):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 164, col:  39):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 164, col:  39):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 164, col: 104):	line too long
+Error: EMPTY_LINE_FUNCTION  (line: 182, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 182, col:   1):	Space on empty line
+Error: TOO_MANY_LINES       (line: 190, col:   1):	Function has more than 25 lines
+src/utils2.c: OK!
+src/checker.c: OK!
+src/exec.c: Error!
+Error: SPACE_AFTER_KW       (line:  51, col:  13):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  51, col:  19):	Missing space before parenthesis (brace/bracket)
+Error: TOO_MANY_LINES       (line:  56, col:   1):	Function has more than 25 lines
+Error: CONSECUTIVE_NEWLINES (line:  90, col:   1):	Consecutive newlines
+Error: WRONG_SCOPE_COMMENT  (line:  99, col:   5):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line: 100, col:   1):	Empty line in function
+Error: SPC_BEFORE_NL        (line: 101, col:  64):	Space before newline
+Error: EMPTY_LINE_FUNCTION  (line: 116, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 116, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 132, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 132, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 132, col:   1):	line too long
+Error: TOO_MANY_LINES       (line: 166, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 174, col:   1):	Too many functions in file
+src/env_set3.c: Error!
+Error: TOO_MANY_LINES       (line:  39, col:   1):	Function has more than 25 lines
+src/redirections2.c: Error!
+Error: LINE_TOO_LONG        (line:  50, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  50, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  76, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  76, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  76, col:   1):	line too long
+src/utils1.c: OK!
+src/simple_checks.c: Error!
+Error: TOO_MANY_TABS_FUNC   (line:   6, col:  13):	extra tabs before function name
+Error: TOO_MANY_TABS_FUNC   (line:  16, col:  13):	extra tabs before function name
+Error: LINE_TOO_LONG        (line:  23, col:   1):	line too long
+Error: TOO_MANY_TABS_FUNC   (line:  26, col:  13):	extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line:  31, col:   1):	Expected newline after brace
+src/reset.c: OK!
+src/functions2.c: Error!
+Error: LINE_TOO_LONG        (line:  47, col:  82):	line too long
+Error: TOO_MANY_LINES       (line:  54, col:   1):	Function has more than 25 lines
+Error: LINE_TOO_LONG        (line:  56, col:   1):	line too long
+src/redirects.c: OK!
+src/quotes.c: OK!
+src/minierrors.c: OK!
+src/arg_counter.c: Error!
+Error: LINE_TOO_LONG        (line:  37, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  37, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  73, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  73, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  73, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 116, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 116, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 116, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 116, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 143, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 143, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 143, col:   1):	line too long
+Error: TOO_MANY_FUNCS       (line: 152, col:   1):	Too many functions in file
+src/cmd2.c: OK!
+src/piped_exec.c: Error!
+Error: LINE_TOO_LONG        (line:  23, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  23, col:   1):	line too long
+src/cd.c: Error!
+Error: LINE_TOO_LONG        (line:  15, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  28, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  85, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  85, col:   1):	line too long
+src/env_set1.c: OK!
+src/functions1.c: Error!
+Error: LINE_TOO_LONG        (line:  27, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  27, col:   1):	line too long
+src/parser.c: OK!
+src/cmd1.c: OK!
+src/env_set2.c: OK!
+src/minishell.c: Error!
+Error: TOO_MANY_LINES       (line:  52, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_VAR      (line: 100, col:   1):	Variable declared in incorrect scope
+Error: DECL_ASSIGN_LINE     (line: 100, col:  22):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_VAR      (line: 106, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 106, col:  12):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 106, col:  13):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 106, col:  16):	Declaration and assignation on a single line
+Error: TOO_MANY_LINES       (line: 128, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line: 143, col:   9):	Comment is invalid in this scope
