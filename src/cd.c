@@ -13,8 +13,8 @@
 */
 
 /*
-*	This function checks if the given string is an absolute path, returns 1 if it is
-*	and 0 otherwise.
+*	This function checks if the given string is an absolute path, returns 1
+*	if it is and 0 otherwise.
 */
 int	isAbsolute(const char *path)
 {
@@ -27,7 +27,8 @@ int	isAbsolute(const char *path)
 
 /*
 *	This function exports the variable OLDPWD with the value passed at old,
-*	its used by the ms_cd function to set the oldpwd variable when changing directory.
+*	its used by the ms_cd function to set the oldpwd variable when changing
+*	directory.
 */
 int	set_old_pwd(t_shell *s, const char *old)
 {
@@ -84,11 +85,11 @@ int	ms_cd_aux(t_shell *s, t_cd *c)
 
 /*
 *	If the aux function doesnt return an error this function will change the
-*	current directory with the chdir function (if is absolute), if it is relative
-*	a concatenation of the current directory with the argument passed is done before
-*	the change of directory.
-*	This function then calls the set_old_pwd function to set the OLDPWD variable to the
-*	previous pwd.
+*	current directory with the chdir function (if is absolute), if it is
+*	relative a concatenation of the current directory with the argument
+*	passed is done before the change of directory.
+*	This function then calls the set_old_pwd function to set the OLDPWD
+*	variable to the previous pwd.
 */
 int	ms_cd(t_shell *s)
 {
