@@ -107,6 +107,7 @@ int	line_edition_loop(
 	key.hook = hook;
 	while (1)
 	{
+		key.executing = 0;
 		key.l.last_key = key.type;
 		key.type = KT_UNRECOGNIZED;
 		if (!get_key(&key))

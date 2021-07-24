@@ -30,6 +30,7 @@ typedef struct s_key
 	const char		*prompt;
 	unsigned int	prompt_len;
 	struct winsize	w;
+	int				executing;
 }	t_key;
 
 t_key	*g_key;

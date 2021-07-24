@@ -26,10 +26,12 @@ int	kf_eol(t_key *k)
 	new_line_reset(k);
 	if (*tmp)
 		ft_save_new(k, tmp);
+	k->executing = 1;
 	set_term_basic();
 	ret = k->hook(k->data, tmp);
 	set_term_specific();
 	if (ret)
 		write_prompt(k);
+	k->executing = 1;
 	return (ret);
 }

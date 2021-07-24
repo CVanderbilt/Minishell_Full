@@ -36,11 +36,11 @@ SRCSC= $(addprefix src/, $(SRC)) \
 
 OBJ=$(SRCS:.c=.o)
 
-$(OBJ):
-	$(CC) -c $(HDDIRS) $(SRCSC)
-
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(LDFLAGS) $(GLFLAGS) $(OBJ)
+
+$(OBJ):
+	$(CC) -c $(HDDIRS) $(SRCSC)
 
 all: $(NAME)
 

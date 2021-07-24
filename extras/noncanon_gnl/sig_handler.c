@@ -9,7 +9,8 @@ void	handler(int signo)
 	if (signo == SIGINT)
 	{
 		new_line_reset(g_key);
-		write_prompt(g_key);
+		if (!g_key->executing)
+			write_prompt(g_key);
 	}
 	else if (signo == SIGWINCH)
 		set_wdata(g_key);
