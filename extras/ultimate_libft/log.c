@@ -13,7 +13,7 @@ int	ft_log(const char *str)
 	return (close(fd));
 }
 
-int ft_logn (const char *str)
+int	ft_logn(const char *str)
 {
 	int	fd;
 
