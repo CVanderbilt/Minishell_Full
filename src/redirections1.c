@@ -153,7 +153,6 @@ int	red_open_dup(t_shell *s, int fd, const char *file, t_redir type)
 		int	status;
 		int	pfd[2];
 
-		s->here_doc = 1;
 		pipe(pfd);
 		pid = fork();
 		if (pid)

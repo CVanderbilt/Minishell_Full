@@ -16,7 +16,7 @@ HDDIRS=-I includes/
 
 SRC= checker.c cmd1.c cmd2.c arg_counter.c \
 	cd.c exec.c functions1.c functions2.c \
-	minishell.c parser.c \
+	minishell.c parser.c init_shell.c\
 	redirections1.c redirections2.c reset.c redirects.c \
 	utils1.c utils2.c minierrors.c get_var.c quotes.c \
 	piped_exec.c env_set1.c env_set2.c env_set3.c simple_checks.c

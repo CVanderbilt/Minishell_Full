@@ -69,7 +69,6 @@ typedef struct s_shell
 	t_args			*args;
 	t_redir_data	r;
 	int				exit_code;
-	int				here_doc;
 }				t_shell;
 
 typedef struct s_ac
@@ -105,5 +104,9 @@ int				is_preserved(char c);
 int				check_path_is_exec(const char *path);
 int				isAbsolute(const char *path);
 char			*get_full_path(char *path);
+
+int				init_shell(
+					t_shell *shell, int argc, char *argv[], const char **envp);
+int				init_commands(t_shell *shell);
 
 #endif
