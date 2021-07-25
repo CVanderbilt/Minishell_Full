@@ -133,6 +133,34 @@ int	aux_here_doc(t_shell *s, const char *word, int wfd)
 	return (1);
 }
 
+int	red_here_doc(t_shell *s, const char *file, int fd)
+{
+	int	pid;
+	int	status;
+	int	pfd[2];
+	
+	pipe(pfd);
+	pid = fork();
+	if (pid)
+	{
+		close(pfd[1]); //cierra el de escritura
+		fd = 0;
+		dup2(pfd[0], fd); //enchufamos pipe de lectura al fd que nos piden (por defecto al 0)
+		waitpid(pid, &status, 0); //a lo mejor habrá que revisar cual es el output de alguna manera
+		return (1 + (int)ft_dummy(close(pfd[0])));
+	}
+	else
+	{
+		ft_dummy(dup2(s->stdin_save, 0) + dup2(s->stdout_save, 1) + dup2(s->stderr_save, 2));
+		aux_here_doc(s, file, pfd[1]);
+		close(pfd[0]);
+		close(pfd[1]);
+		s->forked = 1;
+		exit(0);
+	}
+	return (0);
+}
+
 /*
 *	red_open_dup depending on the redir type duplicates the fd corresponding
 *	to the redirecting/ed file in the selected fd, in the < and << redirections
@@ -166,35 +194,7 @@ int	red_open_dup(t_shell *s, int fd, const char *file, t_redir type)
 			return (-1);
 	}
 	else if (type == RED_HERE_DOC)
-	{
-		int	pid;
-		int	status;
-		int	pfd[2];
-
-		pipe(pfd);
-		pid = fork();
-		if (pid)
-		{
-			close(pfd[1]); //cierra el de escritura
-			fd = 0;
-			dup2(pfd[0], fd); //enchufamos pipe de lectura al fd que nos piden (por defecto al 0)
-			waitpid(pid, &status, 0); //a lo mejor habrá que revisar cual es el output de alguna manera
-			close(pfd[0]);
-			return (1);
-		}
-		else
-		{
-			dup2(s->stdin_save, 0);
-			dup2(s->stdout_save, 1);
-			dup2(s->stderr_save, 2);
-			aux_here_doc(s, file, pfd[1]);
-			close(pfd[0]);
-			close(pfd[1]);
-			s->forked = 1;
-			exit(0);
-		}
-		
-	}
+		return (red_here_doc(s, file, fd));
 	else
 		return (-1);
 	dup2(r.fd2, fd);
