@@ -14,7 +14,7 @@ LDLIBS=-lft
 
 HDDIRS=-I includes/ 
 
-SRC= checker.c cmd1.c cmd2.c arg_counter.c \
+SRC= checker.c cmd1.c cmd2.c arg_counter.c arg_counter_helper.c\
 	cd.c exec.c functions1.c functions2.c \
 	minishell.c parser.c init_shell.c\
 	redirections1.c redirections2.c reset.c redirects.c \

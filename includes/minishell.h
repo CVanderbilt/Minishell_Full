@@ -109,4 +109,5 @@ int				init_shell(
 					t_shell *shell, int argc, char *argv[], const char **envp);
 int				init_commands(t_shell *shell);
 
+int				if_helper(const char *line, t_ac *a, int option);
 #endif

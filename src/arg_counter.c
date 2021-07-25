@@ -7,34 +7,6 @@
 #include <unistd.h>
 
 /*
-*	This function has 2 options:
-*	1 will append the actual char to the parsed line.
-*	2 will append the next char without treating it, and advance the index
-*	so the parser never attepmts to treat it, this is the char overload \.
-*/
-static int	if_helper(const char *line, t_ac *a, int option)
-{
-	if (option == 1)
-	{
-		a->tmp = ft_strjoin(a->tmp, a->buff, 'L');
-		if (!a->tmp)
-			return (miniperror(ERR_MEM));
-		if (is_cmd_red(a->buff[0]))
-			a->is_red = 1;
-	}
-	else if (option == 2)
-	{
-		a->buff[0] = line[++a->j];
-		if (!a->buff[0])
-			return ((int)ft_free(a->tmp) + miniperror(ERR_MULTILINE));
-		a->tmp = ft_strjoin(a->tmp, a->buff, 'L');
-		if (!a->tmp)
-			return (miniperror(ERR_MEM));
-	}
-	return (1);
-}
-
-/*
 *	This function checks the actual char, if it is a quote the function
 *	isquoted will be called to manage them, after it if a redirection was
 *	find 0 will be returned and if an error ocurred we asume it was a
