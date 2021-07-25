@@ -138,20 +138,21 @@ int	red_here_doc(t_shell *s, const char *file, int fd)
 	int	pid;
 	int	status;
 	int	pfd[2];
-	
+
 	pipe(pfd);
 	pid = fork();
 	if (pid)
 	{
-		close(pfd[1]); //cierra el de escritura
+		close(pfd[1]);
 		fd = 0;
-		dup2(pfd[0], fd); //enchufamos pipe de lectura al fd que nos piden (por defecto al 0)
-		waitpid(pid, &status, 0); //a lo mejor habrá que revisar cual es el output de alguna manera
+		dup2(pfd[0], fd);
+		waitpid(pid, &status, 0);
 		return (1 + (int)ft_dummy(close(pfd[0])));
 	}
 	else
 	{
-		ft_dummy(dup2(s->stdin_save, 0) + dup2(s->stdout_save, 1) + dup2(s->stderr_save, 2));
+		ft_dummy(dup2(s->stdin_save, 0) + dup2(s->stdout_save, 1)
+			+ dup2(s->stderr_save, 2));
 		aux_here_doc(s, file, pfd[1]);
 		close(pfd[0]);
 		close(pfd[1]);
@@ -171,7 +172,6 @@ int	red_out(t_rod *r, const char *file, t_redir type)
 		return (-1);
 	return (1);
 }
-
 
 int	red_open_dup_aux(t_shell *s, int fd, t_redir type)
 {
