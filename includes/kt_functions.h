@@ -1,7 +1,6 @@
 #ifndef KT_FUNCTIONS_H
 # define KT_FUNCTIONS_H
 # define KT_FUNCNUM 9
-# define ISPRINTABLE(c) (c > 31 && c < 127)
 # include "line_edition.h"
 # include <sys/ioctl.h>
 # include <stdio.h>
@@ -30,6 +29,7 @@ typedef struct s_key
 	const char		*prompt;
 	unsigned int	prompt_len;
 	struct winsize	w;
+	int				executing;
 }	t_key;
 
 t_key	*g_key;

@@ -32,7 +32,7 @@
 # include "utils.h"
 # include "env_set.h"
 
-#include "minierrors.h"
+# include "minierrors.h"
 
 # define CMD_SIZE 7
 
@@ -91,7 +91,7 @@ int				arg_counter(t_shell *shell, const char *line, int pos);
 int				reds_counter(t_shell *shell, const char *line, int j);
 void			*get_cmd(t_shell *shell);
 int				piped_execution(t_shell *shell,
-void 			*(*ms_cmd)(t_shell*), char *line);
+void			*(*ms_cmd)(t_shell*), char *line);
 char			*unnamed(t_shell *shell, const char *line, int i, int pos);
 int				get_var(t_shell *shell, const char *line, char **dst, int pos);
 int				apply_redirections(t_shell *s, t_args **list);
