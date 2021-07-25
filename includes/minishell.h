@@ -110,4 +110,5 @@ int				init_shell(
 int				init_commands(t_shell *shell);
 
 int				if_helper(const char *line, t_ac *a, int option);
+int				red_here_doc(t_shell *s, const char *file, int fd);
 #endif
