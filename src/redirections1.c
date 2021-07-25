@@ -92,9 +92,8 @@ int	here_doc_loop(char *ret, const char *word, int wfd)
 			return (1 + (int)ft_free(line));
 		if (!ft_strcmp(line, word))
 		{
-			free(line);
 			ft_putstr_fd(wfd, ret);
-			free(ret);
+			ft_dummy((int)ft_free(line) + (int)ft_free(ret));
 			return (0);
 		}
 		free (ret);
@@ -149,7 +148,6 @@ int	red_open_dup(t_shell *s, int fd, const char *file, t_redir type)
 		fd = 0;
 	else if (fd < 0)
 		fd = 1;
-	
 	if (fd == s->stderr_save || fd == s->stdin_save || fd == s->stdout_save)
 		return (0);
 	if (type == RED_OUT || type == RED_OUT_APP)
