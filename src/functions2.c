@@ -12,6 +12,30 @@
 *	in the shell struct in s->args.
 */
 
+int	export_loop(t_shell *s, char **argv)
+{
+	int		i;
+	t_env	*aux;
+
+	i = 0;
+	while (argv[++i])
+	{
+		if (argv[i][0] == '=')
+		{
+			ft_putstr_fd(2, "= : ");
+			miniperror(ERR_WRONG_TOKEN);
+		}
+		else
+		{
+			aux = new_env(argv[i]);
+			if (!aux)
+				return ((int)free_argv(argv) + set_ret(s, miniperror(ERR_MEM)));
+			env_add(s->env, aux);
+		}
+	}
+	return (1);
+}
+
 /*
 *	This function exports a variable parsing the argument in the form
 *	key=value, its stored in t_env struct in shell, if variable already exists
@@ -21,34 +45,16 @@
 */
 int	ms_export(t_shell *s)
 {
-	int		i;
-	t_env	*aux;
 	char	**argv;
 
-	i = 0;
 	argv = get_argv(s->args);
 	if (!argv)
 		return (set_ret(s, miniperror(ERR_MEM)));
 	if (!argv[1])
 		return ((int)free_argv(argv) + env_sorted_display_all(s->env));
 	else
-	{
-		while (argv[++i])
-		{
-			if (argv[i][0] == '=')
-			{
-				ft_putstr_fd(2, "= : ");
-				miniperror(ERR_WRONG_TOKEN);
-			}
-			else
-			{
-				aux = new_env(argv[i]);
-				if (!aux)
-					return ((int)free_argv(argv) + set_ret(s, miniperror(ERR_MEM)));
-				env_add(s->env, aux);
-			}
-		}
-	}
+		if (!export_loop(s, argv))
+			return (0);
 	free_argv(argv);
 	return (set_ret(s, 1));
 }
@@ -56,7 +62,8 @@ int	ms_export(t_shell *s)
 /*
 *	This function searches in the list of variables the variable with the key
 *	provided and deletes them from the struct of variables (shell->env).
-*	n arguments are accepted, it can delete (unset) multiple keys with the same command.
+*	n arguments are accepted, it can delete (unset) multiple keys with the same
+*	command.
 */
 int	ms_unset(t_shell *s)
 {
