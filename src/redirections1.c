@@ -70,23 +70,18 @@ typedef struct s_rod
 	struct stat	st;
 }	t_rod;
 
-/*
-*	Reads line by line storing it, ends with eof or
-*	when the keyword is readed.
-*	not implemented - flag.
-*
-*	NEED TO CHECK: reading from file instead of console.
-*/
-
-int	aux_here_doc(t_shell *s, const char *word, int wfd)
+char	*here_doc_dups(t_shell *s)
 {
-	char	*line;
-	char	*ret;
-	char	*aux;
-
-	ret = ft_strdup("");
 	dup2(0, s->stdin_save);
 	dup2(1, s->stdout_save);
+	return (ft_strdup(""));
+}
+
+int	here_doc_loop(char *ret, const char *word, int wfd)
+{
+	char	*line;
+	char	*aux;
+
 	while (1)
 	{
 		line = readline("> ");
@@ -97,7 +92,6 @@ int	aux_here_doc(t_shell *s, const char *word, int wfd)
 			return (1 + (int)ft_free(line));
 		if (!ft_strcmp(line, word))
 		{
-			//aqui los dupeos (stdin a fd)
 			free(line);
 			ft_putstr_fd(wfd, ret);
 			free(ret);
@@ -110,8 +104,34 @@ int	aux_here_doc(t_shell *s, const char *word, int wfd)
 			return (1 + (int)ft_free(line));
 		free(line);
 	}
+	return (2);
+}
+
+/*
+*	Reads line by line storing it, ends with eof or
+*	when the keyword is readed.
+*	not implemented - flag.
+*
+*	NEED TO CHECK: reading from file instead of console.
+*/
+int	aux_here_doc(t_shell *s, const char *word, int wfd)
+{
+	char	*line;
+	char	*ret;
+	char	*aux;
+	int		i;
+
+	ret = here_doc_dups(s);
+	if (!ret)
+		return (0);
+	i = here_doc_loop(ret, word, wfd);
+	if (!i)
+		return (0);
+	if (i == 1)
+		return (1);
 	if (ret)
 		free(ret);
+	return (1);
 }
 
 /*
