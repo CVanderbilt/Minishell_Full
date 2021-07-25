@@ -148,7 +148,8 @@ static int	search_and_execute(t_shell *s, char *name, char **argv, char **envp)
 				+ set_ret(s, miniperror(ERR_MEM)));
 		if (check_path_is_exec(t.new_path))
 		{
-			argv[0] = t.new_path + (int)ft_free(t.paths) + (int)ft_free(argv[0]);
+			argv[0] = t.new_path + (int)ft_free(t.paths)
+				+ (int)ft_free(argv[0]);
 			return (exec_executer(s, argv[0], argv, envp));
 		}
 		free (t.new_path);

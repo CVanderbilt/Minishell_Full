@@ -61,7 +61,7 @@ int	init_shell(
 	{
 		tmp = get_full_path(argv[1]);
 		if (check_path_is_exec(tmp))
-			return (miniperror(ERR_INVALID_FILE_OR_PATH));	
+			return (miniperror(ERR_INVALID_FILE_OR_PATH));
 		shell->fd = open(argv[1], O_RDONLY);
 		if (shell->fd < 0)
 			return (-1);
