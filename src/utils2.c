@@ -36,3 +36,20 @@ void	sort_ptr_arr(void **arr, unsigned int size,
 		}
 	}
 }
+
+/*
+*	Returns a new string with the absolute path to the path provided, if the path
+*	provided was an absolute path itself it copies it.
+*/
+char	*get_full_path(char *path)
+{
+	char	*ret;
+
+	if (isAbsolute(path))
+		return (ft_strdup(path));
+	if (!ft_sstrjoin(getcwd(0, 0), "/", 'l', &ret))
+		return (0);
+	if (!ft_sstrjoin(ret, path, 'l', &ret))
+		return (0);
+	return (ret);
+}

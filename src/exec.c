@@ -96,23 +96,6 @@ int	check_path_is_exec(const char *path)
 	return (0);
 }
 
-/*
-*	Returns a new string with the absolute path to the path provided, if the path
-*	provided was an absolute path itself it copies it.
-*/
-char	*get_full_path(char *path)
-{
-	char	*ret;
-
-	if (isAbsolute(path))
-		return (ft_strdup(path));
-	if (!ft_sstrjoin(getcwd(0, 0), "/", 'l', &ret))
-		return (0);
-	if (!ft_sstrjoin(ret, path, 'l', &ret))
-		return (0);
-	return (ret);
-}
-
 typedef struct s_sae
 {
 	char			*paths;
@@ -127,7 +110,7 @@ typedef struct s_sae
 *	and if any of them exists it is executed with the exec_executer, if not it
 *	returns the error CMD_NOT_FOUND.
 */
-static int	search_and_execute(t_shell *s, char *name, char **argv, char **envp)
+static int	search_and_execute(t_shell *s, char *name, char **av, char **envp)
 {
 	t_sae	t;
 
@@ -148,9 +131,8 @@ static int	search_and_execute(t_shell *s, char *name, char **argv, char **envp)
 				+ set_ret(s, miniperror(ERR_MEM)));
 		if (check_path_is_exec(t.new_path))
 		{
-			argv[0] = t.new_path + (int)ft_free(t.paths)
-				+ (int)ft_free(argv[0]);
-			return (exec_executer(s, argv[0], argv, envp));
+			av[0] = t.new_path + (int)ft_free(t.paths) + (int)ft_free(av[0]);
+			return (exec_executer(s, av[0], av, envp));
 		}
 		free (t.new_path);
 	}
